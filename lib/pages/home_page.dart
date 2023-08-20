@@ -60,8 +60,7 @@ class _HomePageState extends State<HomePage> {
                               bottomRight: Radius.circular(20)),
                           image: DecorationImage(
                             image: AssetImage(url),
-                            fit: BoxFit
-                                .cover, // This will fill the container with the image
+                            fit: BoxFit.cover,
                           ),
                         ),
                       );
@@ -158,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                   enableInfiniteScroll: false,
                   autoPlay: false,
                   height: 310,
-                  viewportFraction: 0.5, // Adjust this value to control the width of the items
+                  viewportFraction: 0.5,
                   
                   
                 ),

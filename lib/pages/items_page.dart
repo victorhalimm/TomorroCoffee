@@ -91,11 +91,11 @@ class _ItemsPageState extends State<ItemsPage> {
               constraints: BoxConstraints(minHeight: screenHeight * 0.4),
               child: GridView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true, // Important
+                shrinkWrap: true,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.6, // Adjust as per your design
+                  childAspectRatio: 0.6,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
