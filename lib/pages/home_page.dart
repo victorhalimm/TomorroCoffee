@@ -1,6 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_qualif_vc/main.dart';
 import 'package:flutter_qualif_vc/pages/login_page.dart';
+import 'package:flutter_qualif_vc/themes/dark_theme.dart';
+import 'package:flutter_qualif_vc/themes/light_theme.dart';
 import 'package:flutter_qualif_vc/widgets/product_card_carousel.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,8 +25,17 @@ class _HomePageState extends State<HomePage> {
       "assets/coffee_tomoro_3.png"
     ];
 
+    void changeTheme() {
+      if (themeNotifier.value == lightTheme) {
+        themeNotifier.value = darkTheme;
+      }
+      else {
+        themeNotifier.value = lightTheme;
+      }
+    }
+
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -56,6 +68,22 @@ class _HomePageState extends State<HomePage> {
                     }).toList(),
                   ),
                   Positioned(
+                    top: 10,
+                    right: 10,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        changeTheme();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                      ),
+                      child: const Icon(
+                        Icons.light
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     top: 370,
                     left: 0,
                     right: 0,
@@ -67,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                         width: screenWidth * 0.95,
                         height: 70,
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.primary,
                             borderRadius: BorderRadius.circular(20)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,16 +116,18 @@ class _HomePageState extends State<HomePage> {
                               style: ElevatedButton.styleFrom(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 20,
-                                    vertical: 3), // Set the padding
+                                    vertical: 3),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(
-                                      15), // Set the border radius
+                                      15),
                                 ),
+                                backgroundColor: Theme.of(context).colorScheme.tertiary
                               ),
                               child: const Text(
                                 "Logout",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 16),
+                                    fontWeight: FontWeight.bold, fontSize: 16,
+                                    color: Colors.white,),
                               ),
                             )
                           ],
@@ -127,10 +157,9 @@ class _HomePageState extends State<HomePage> {
                   pageSnapping: false,
                   enableInfiniteScroll: false,
                   autoPlay: false,
-                  height: 365,
+                  height: 310,
                   viewportFraction: 0.5, // Adjust this value to control the width of the items
-                  enlargeCenterPage: true,
-                  enlargeFactor: 0.1,
+                  
                   
                 ),
                 items: const [

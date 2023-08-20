@@ -43,6 +43,20 @@ class _LoginPageState extends State<LoginPage> {
       return;
     }
 
+    if (username.length < 8) {
+      setState(() {
+        usernameError = "Username must have at least 8 letters";
+      });
+      return;
+    }
+
+    if (password.contains(' ')) {
+      setState(() {
+        passwordError = "Password must not have spaces";
+      });
+      return;
+    }
+
     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) {
       return MainPage(username: username);
     }), (route) => false);
@@ -126,10 +140,16 @@ class _LoginPageState extends State<LoginPage> {
                           decoration: InputDecoration(
                             hintText: "Username",
                             labelText: "Username",
+                            labelStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                             errorText: usernameError,
                             border: const OutlineInputBorder(
                               borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),                                  
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide(color: Colors.deepOrange)
                             ),
                           ),
                         ),
@@ -144,9 +164,15 @@ class _LoginPageState extends State<LoginPage> {
                             hintText: "Password",
                             errorText: passwordError,
                             labelText: "Password",
+                            labelStyle: TextStyle(color: Theme.of(context).colorScheme.onBackground),
                             border: const OutlineInputBorder(
                               borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),                                  
+                            ),
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
+                                  borderSide: BorderSide(color: Colors.deepOrange)
                             ),
                           ),
                         ),
@@ -164,10 +190,10 @@ class _LoginPageState extends State<LoginPage> {
                               backgroundColor: Colors.transparent,
                               shadowColor: Colors.transparent,
                             ),
-                            child: const Text(
+                            child: Text(
                               'Login',
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+                                  fontWeight: FontWeight.bold, fontSize: 18, color: Theme.of(context).colorScheme.onBackground),
                             )),
                       ),
                     ],

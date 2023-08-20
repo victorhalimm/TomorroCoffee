@@ -1,24 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_qualif_vc/models/product.dart';
+import 'package:flutter_qualif_vc/pages/details_page.dart';
 import 'package:flutter_qualif_vc/widgets/product_card.dart';
 
 
 class ItemsPage extends StatefulWidget {
   final String? username;
-  const ItemsPage({super.key, this.username});
+  final void Function(Product) onSelectProduct;
+  final List<Product> products;
 
+  const ItemsPage({super.key, required this.username, required this.onSelectProduct, required this.products});
+  
   @override
   State<ItemsPage> createState() => _ItemsPageState();
 }
 
 class _ItemsPageState extends State<ItemsPage> {
 
-  final List<Product> products = [
-     Product(title: "Americano", imageUrl: "assets/product_carousel/americano.jpg", description: "Hot/Iced", price: 2.00),
-     Product(title: "Cappucino", imageUrl: "assets/product_carousel/cappucino.jpg", description: "Hot", price: 4.00),
-     Product(title: "Espresso", imageUrl: "assets/product_carousel/espresso.jpg", description: "Hot", price: 1.00),
-     Product(title: "Latte", imageUrl: "assets/product_carousel/latte.jpg", description: "Hot/Iced", price: 3.00),
-  ];
+
+  void updateProduct(Product updatedProduct) {
+    setState(() {
+      int updateIdx = widget.products.indexWhere((product) => product.title == updatedProduct.title);
+
+      if (updateIdx != -1) 
+        widget.products[updateIdx] = updatedProduct;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +34,7 @@ class _ItemsPageState extends State<ItemsPage> {
     double screenHeight = MediaQuery.of(context).size.height; 
     
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Theme.of(context).colorScheme.background,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +67,7 @@ class _ItemsPageState extends State<ItemsPage> {
                 margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Colors.white
+                  color: Theme.of(context).colorScheme.secondary
                 ),
                 child: const TextField(
                   decoration: InputDecoration(
@@ -92,13 +99,18 @@ class _ItemsPageState extends State<ItemsPage> {
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
                 ),
-                itemCount: products.length,
+                itemCount: widget.products.length,
                 itemBuilder: (context, index) {
-                  return ProductCard(
-                    title: products[index].title,
-                    imageUrl: products[index].imageUrl,
-                    description: products[index].description,
-                    price: products[index].price,
+                  return InkWell(
+                    onTap: (() {
+                      widget.onSelectProduct(widget.products[index]);
+                    }),
+                    child: ProductCard(
+                      title: widget.products[index].title,
+                      imageUrl: widget.products[index].imageUrl,
+                      description: widget.products[index].description,
+                      price: widget.products[index].price,
+                    ),
                   );
                 },
               ),

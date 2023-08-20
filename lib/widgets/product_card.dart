@@ -22,9 +22,9 @@ class ProductCard extends StatelessWidget {
     return Container(
       width: screenWidth * 0.43,
       height: 274,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(10)),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
+        borderRadius: BorderRadius.all(Radius.circular(20)),
       ),
       child: Column(
         children: [
@@ -57,10 +57,10 @@ class ProductCard extends StatelessWidget {
                       ),
                       Text(
                         description,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
-                          color: Colors.black38,
+                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
                         )
                       ),
                       Align(

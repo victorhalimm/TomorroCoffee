@@ -22,16 +22,16 @@ class ProductCardCarousel extends StatelessWidget {
       width: 0.45 * screenWidth,
       height: 350,
       margin: const EdgeInsets.symmetric(vertical: 10),
-      padding: const EdgeInsets.all(7),
-      decoration: const BoxDecoration(
-        color: Colors.white,
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: Column(
         children:  [
           Container(
-            width: screenWidth * 0.4,
-            height: 225,
+            width: double.infinity,
+            height: 175,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(imageUrl),
@@ -59,10 +59,10 @@ class ProductCardCarousel extends StatelessWidget {
                       ),
                       Text(
                         description,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
-                          color: Colors.black38,
+                          color: Theme.of(context).colorScheme.onBackground.withOpacity(0.5),
                         )
                       ),
                       Align(
